@@ -49,33 +49,36 @@ const Theme = () => {
         rounded border py-2
         dark:border-dark-400 dark:bg-dark-300"
         >
-          {themes.map(({ value, label, icon }) => (
+          {themes.map((item) => (
             <MenubarItem
-              key={value}
-              className="flex items-center gap-4 px-2.5 py-2 dark:focus:bg-dark-400"
+              key={item.value}
+              className="flex items-center gap-4 px-2.5 py-2 focus:bg-slate-200 dark:focus:bg-dark-400"
               onClick={() => {
-                setMode(value);
-                localStorage.theme = value;
+                setMode(item.value);
 
-                // if (value !== "system") {
-                //   localStorage.theme = value;
-                // } else {
-                //   localStorage.removeItem("themes");
-                // }
+                if (item.value !== "system") {
+                  localStorage.theme = item.value;
+                } else {
+                  localStorage.removeItem("themes");
+                }
               }}
             >
               <Image
-                src={icon}
-                alt={value}
+                src={item.icon}
+                alt={item.value}
                 width={16}
                 height={16}
-                className={`${mode === value && "active-theme"}`}
+                className={`${mode === item.value && "active-theme"}`}
               />
               <p
                 className={`body-semibold text-light-500 
-              ${mode === value ? "text-primary-500" : "text-dark100_light900"}`}
+              ${
+                mode === item.value
+                  ? "text-primary-500"
+                  : "text-dark100_light900"
+              }`}
               >
-                {label}
+                {item.label}
               </p>
             </MenubarItem>
           ))}
