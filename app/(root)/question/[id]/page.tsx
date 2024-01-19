@@ -9,13 +9,12 @@ import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import AllAnswers from "@/components/shared/allAnswers/allAnswers";
 import Votes from "@/components/shared/votes/Votes";
+import { URLProps } from "@/types/index";
+import AllAnswers from "@/components/shared/allAnswers/AllAnswers";
 
-const Question = async ({ params, searchParams }) => {
-  const { id } = params;
+const Question = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
-
   // const clerkId = "123456789";
 
   let mongoUser;
@@ -99,7 +98,7 @@ const Question = async ({ params, searchParams }) => {
         questionId={result._id}
         userId={mongoUser._id}
         totalAnswers={result.answers.length}
-        page={searchParams.page}
+        page={searchParams?.page ? +searchParams.page : 1}
         filter={searchParams?.filter}
       />
       <Answer

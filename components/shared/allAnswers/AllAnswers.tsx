@@ -8,20 +8,30 @@ import Image from '@/node_modules/next/image';
 import ParseHTML from '../ParseHTML';
 import Votes from '../votes/Votes';
 
-interface Props {
-  questionId: string;
-  userId: string;
+import type {
+  QuestionId,
+  UserId,
+  OptionalPage,
+  OptionalFilter,
+} from "@/lib/actions/shared.types";
+
+interface Props extends QuestionId, UserId, OptionalPage, OptionalFilter {
   totalAnswers: number;
-  page?: number;
-  filter?: string;
 }
 
-const AllAnswers = async ({ questionId, userId, totalAnswers, page, filter }: Props) => {
+const AllAnswers = async ({ questionId,
+  userId,
+  totalAnswers,
+  page,
+  filter
+}: Props) => {
+
   const result = await getAnswers({
     questionId,
     page: page ? +page : 1,
     sortBy: filter
   })
+
   return (
     <div className="mt-11">
       <div className="flex items-center justify-between">
