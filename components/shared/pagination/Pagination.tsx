@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 interface Props {
   pageNumber: number;
-  isNext: boolean;
+  isNext: boolean | undefined;
 }
 
 const Pagination = ({ pageNumber, isNext }: Props) => {

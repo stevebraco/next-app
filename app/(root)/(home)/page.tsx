@@ -18,8 +18,6 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
     page: searchParams.page ? +searchParams.page : 1,
   });
 
-  console.log(result?.questions);
-
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -69,8 +67,9 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
           />
         )}
       </div>
-      <Pagination pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={result.isNext} />
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result?.isNext} />
     </>
   );
 }
