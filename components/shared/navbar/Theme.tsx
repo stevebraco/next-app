@@ -49,7 +49,7 @@ const Theme = () => {
         rounded border py-2
         dark:border-dark-400 dark:bg-dark-300"
         >
-          {themes.map((item) => (
+          {themes.map((item: any) => (
             <MenubarItem
               key={item.value}
               className="flex items-center gap-4 px-2.5 py-2 focus:bg-slate-200 dark:focus:bg-dark-400"
@@ -72,11 +72,10 @@ const Theme = () => {
               />
               <p
                 className={`body-semibold text-light-500 
-              ${
-                mode === item.value
-                  ? "text-primary-500"
-                  : "text-dark100_light900"
-              }`}
+              ${mode === item.value
+                    ? "text-primary-500"
+                    : "text-dark100_light900"
+                  }`}
               >
                 {item.label}
               </p>

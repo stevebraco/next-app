@@ -32,7 +32,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <section className="mt-12 flex flex-wrap gap-4">
         {result.tags.length > 0 ? (
-          result.tags.map((tag) => <TagCard key={tag._id} tag={tag} />)
+          result.tags.map((tag: any) => <TagCard key={tag._id} tag={tag} />)
         ) : (
           <NoResult
             title="No Tags Found"
