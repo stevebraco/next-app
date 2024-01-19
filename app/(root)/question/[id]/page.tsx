@@ -3,24 +3,39 @@ import ParseHTML from "@/components/shared/ParseHTML";
 import Metric from "@/components/shared/metric/Metric";
 import RenderTag from "@/components/shared/renderTag/RenderTag";
 import { getQuestionById } from "@/lib/actions/question.action";
+import { getUserById } from "@/lib/actions/user.action";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import AllAnswers from "@/components/shared/allAnswers/allAnswers";
+import Votes from "@/components/shared/votes/Votes";
 
 const Question = async ({ params, searchParams }) => {
   const { id } = params;
-  const result = await getQuestionById({ questionId: id });
+  const { userId: clerkId } = auth();
+
+  // const clerkId = "123456789";
+
+  let mongoUser;
+  if (clerkId) {
+    mongoUser = await getUserById({ userId: clerkId });
+  }
+  console.log(mongoUser);
+
+  const result = await getQuestionById({ questionId: params.id })
+
   return (
     <>
-      <div>
+      <div className="flex-start w-full flex-col">
         <div className="flex w-full flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
           <Link
             href={`/profile/${result.author.clerkId}`}
             className="flex items-center justify-start gap-1"
           >
             <Image
-              src={"/result.author.picture"}
+              src={"/assets/images/avatar.svg"}
               alt="profile"
               className="rounded-full"
               width={22}
@@ -30,7 +45,18 @@ const Question = async ({ params, searchParams }) => {
               {result.author.name}
             </p>
           </Link>
-          <div className="flex justify-end">VOTING</div>
+          <div className="flex justify-end">
+            <Votes
+              type='Question'
+              itemId={JSON.stringify(result._id)}
+              userId={JSON.stringify(mongoUser._id)}
+              upvotes={result.upvotes.length}
+              hasupVoted={result.upvotes.includes(mongoUser._id)}
+              downvotes={result.downvotes.length}
+              hasdownVoted={result.downvotes.includes(mongoUser._id)}
+              hasSaved={mongoUser?.saved.includes(result._id)}
+            />
+          </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
           {result.title}
@@ -67,8 +93,20 @@ const Question = async ({ params, searchParams }) => {
             <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
           ))}
         </div>
-        <Answer />
       </div>
+
+      <AllAnswers
+        questionId={result._id}
+        userId={mongoUser._id}
+        totalAnswers={result.answers.length}
+        page={searchParams.page}
+        filter={searchParams?.filter}
+      />
+      <Answer
+        question={result.content}
+        questionId={JSON.stringify(result._id)}
+        authorId={JSON.stringify(mongoUser._id)}
+      />
     </>
   );
 };

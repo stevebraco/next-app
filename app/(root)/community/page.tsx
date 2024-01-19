@@ -1,13 +1,17 @@
 import UserCard from "@/components/card/UserCard";
 import Filter from "@/components/shared/filter/Filter";
+import NoResult from "@/components/shared/noResult/NoResult";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
-import Link from "next/link";
+import { SearchParamsProps } from "@/types/index";
 import React from "react";
 
-export async function Community() {
-  const result = await getAllUsers({});
+export async function Community({ searchParams }: SearchParamsProps) {
+  const result = await getAllUsers({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter
+  });
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">All Users</h1>
@@ -19,6 +23,7 @@ export async function Community() {
           placeholder="Search for amazing minds"
           otherClasses="flex-1"
         />
+
         <Filter
           filters={UserFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
@@ -26,14 +31,16 @@ export async function Community() {
       </div>
       <section className="mt-12 flex flex-wrap gap-4">
         {result.users.length > 0 ? (
-          result.users.map((user) => <UserCard key={user._id} user={user} />)
+          result.users.map((user: any) => (
+            <UserCard key={user._id} user={user} />
+          ))
         ) : (
-          <div className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
-            <p>No users yet</p>
-            <Link href="/sign-up" className="mt-1 font-bold text-accent-blue">
-              Join to be the first !
-            </Link>
-          </div>
+          <NoResult
+            title="No Users Found"
+            description="Be the first to break the silence! 🚀 Signup to be the first and kickstart the community. Get involved! 💡"
+            link="/sign-up"
+            linkTitle="Sign Up"
+          />
         )}
       </section>
     </>

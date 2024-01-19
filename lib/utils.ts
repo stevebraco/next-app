@@ -1,5 +1,8 @@
+import { BADGE_CRITERIA } from "@/constants/index";
+import { BadgeCounts } from "@/types/index";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import qs from 'query-string'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -51,3 +54,76 @@ export const formatAndDivideNumber = (number: number): string => {
     return `${number}`;
   }
 };
+
+export const getFormattedJoinedDate = (date: Date): string => {
+  const month: string = date.toLocaleString("en", { month: "long" });
+  const year: number = date.getFullYear();
+
+  return `Joined ${month} ${year}`;
+};
+
+export const getFormattedNumber = (number: number): string => {
+  if (number < 1000) return number.toString(); // Return the same number
+  if (number < 1000000) return `${(number / 1000).toFixed(1)}K`; // Convert to K for number from 1000 < n < 1 million
+  if (number < 1000000000) return `${(number / 1000000).toFixed(1)}M`; // Convert to M for number from 1 million < n < 1 billion
+  return `${(number / 1000000000).toFixed(1)}B`; // Convert to B for number n > 1 billion
+};
+
+export const assignBadges = (params: BadgeParams): BadgeCounts => {
+  const badgeCounts: BadgeCounts = {
+    GOLD: 0,
+    SILVER: 0,
+    BRONZE: 0,
+  };
+  const { criteria } = params;
+
+  criteria.forEach((item) => {
+    const { type, count } = item;
+    const badgeLevels: any = BADGE_CRITERIA[type];
+
+
+    Object.keys(badgeLevels).forEach((level: any) => {
+      if (count >= badgeLevels[level]) {
+        badgeCounts[level as keyof BadgeCounts] += 1;
+      }
+    });
+  });
+
+  return badgeCounts;
+};
+
+interface UrlQueryParams {
+  params: string,
+  key: string,
+  value: string | null,
+}
+
+export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
+  const currentUrl = qs.parse(params)
+  currentUrl[key] = value
+
+  return qs.stringifyUrl({
+    url: window.location.pathname,
+    query: currentUrl
+  }, {
+    skipNull: true
+  })
+}
+
+interface RemoveQueryParams {
+  params: string,
+  keysToRemove: string[],
+}
+
+export const removeKeysFromQuery = ({ params, keysToRemove }: RemoveQueryParams) => {
+  const currentUrl = qs.parse(params)
+
+  keysToRemove.forEach((key) => delete currentUrl[key])
+
+  return qs.stringifyUrl({
+    url: window.location.pathname,
+    query: currentUrl
+  }, {
+    skipNull: true
+  })
+}

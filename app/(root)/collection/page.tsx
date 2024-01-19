@@ -1,35 +1,30 @@
 // import { UserButton } from "@clerk/nextjs";
 import QuestionCard from "@/components/card/QuestionCard";
-import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/filter/Filter";
 import NoResult from "@/components/shared/noResult/NoResult";
-import Pagination from "@/components/shared/pagination/Pagination";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
-import { Button } from "@/components/ui/button";
-import { HomePageFilters } from "@/constants/filters";
-import { getQuestions } from "@/lib/actions/question.action";
+import { QuestionFilters } from "@/constants/filters";
+import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types/index";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const result = await getQuestions({
+  const { userId: clerkId } = auth()
+
+  // const clerkId = '123456789'
+
+  if (!clerkId) return
+
+  const result = await getSavedQuestions({
+    clerkId,
     searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
+    filter: searchParams.filter
   });
-
-  console.log(result?.questions);
-
   return (
     <>
-      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Questions</h1>
-        <Link href="/ask-question" className="flex justify-end max-sm:w-full">
-          <Button className="primary-gradient min-h-[46px] px-4 py-3 !text-light-900">
-            Ask a Question
-          </Button>
-        </Link>
-      </div>
+      <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchBar
           route="/"
@@ -39,15 +34,14 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           otherClasses="flex-1"
         />
         <Filter
-          filters={HomePageFilters}
+          filters={QuestionFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
-          containerClasses="hidden max-md:flex"
+        // containerClasses="max-md:flex"
         />
       </div>
-      <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
         {result!.questions.length > 0 ? (
-          result?.questions.map((question: any) => (
+          result?.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
@@ -69,8 +63,6 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           />
         )}
       </div>
-      <Pagination pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={result.isNext} />
     </>
   );
 }

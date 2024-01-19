@@ -11,7 +11,6 @@ interface Props {
 }
 
 const TagCard = ({ tag }: Props) => {
-  console.log(tag);
   return (
     <Link
       href={`/tags/${tag._id}`}
