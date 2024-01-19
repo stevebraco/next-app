@@ -7,7 +7,7 @@ import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types/index";
 import UserCard from "@/components/card/UserCard";
 
-export async function Community({ searchParams }: SearchParamsProps) {
+const Page = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter
@@ -46,3 +46,4 @@ export async function Community({ searchParams }: SearchParamsProps) {
     </>
   );
 }
+export default Page
