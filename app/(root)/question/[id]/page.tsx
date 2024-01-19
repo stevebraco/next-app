@@ -13,7 +13,7 @@ import Votes from "@/components/shared/votes/Votes";
 import { URLProps } from "@/types/index";
 import AllAnswers from "@/components/shared/allAnswers/AllAnswers";
 
-const Question = async ({ params, searchParams }: URLProps) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
   // const clerkId = "123456789";
 
@@ -110,4 +110,4 @@ const Question = async ({ params, searchParams }: URLProps) => {
   );
 };
 
-export default Question;
+export default Page;

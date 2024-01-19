@@ -10,7 +10,7 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 
 
-export default async function Home({ searchParams }: SearchParamsProps) {
+const Page = async ({ searchParams }: SearchParamsProps) => {
   const { userId: clerkId } = auth()
 
   // const clerkId = '123456789'
@@ -66,3 +66,5 @@ export default async function Home({ searchParams }: SearchParamsProps) {
     </>
   );
 }
+
+export default Page

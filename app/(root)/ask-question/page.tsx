@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.action";
 
-const AskQuestions = async () => {
+const Page = async () => {
   const { userId } = auth();
 
 
@@ -22,4 +22,4 @@ const AskQuestions = async () => {
   );
 };
 
-export default AskQuestions;
+export default Page;

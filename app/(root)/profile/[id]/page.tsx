@@ -12,7 +12,7 @@ import { SignedIn, auth } from "@clerk/nextjs";
 import React from 'react'
 import AnswersTab from '@/components/shared/answersTab/AnswersTab';
 
-const page = async ({ params, searchParams }: URLProps) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const userInfo = await getUserInfo({ userId: params.id })
   const { userId: clerkId } = auth()
   // const clerkId = '123456789'
@@ -113,4 +113,4 @@ const page = async ({ params, searchParams }: URLProps) => {
   )
 }
 
-export default page
+export default Page

@@ -6,7 +6,7 @@ import React from 'react'
 import { auth } from "@clerk/nextjs";
 
 
-const page = async ({ params }: ParamsProps) => {
+const Page = async ({ params }: ParamsProps) => {
   const { userId } = auth();
   // const userId = "123456789";
 
@@ -29,4 +29,4 @@ const page = async ({ params }: ParamsProps) => {
   )
 }
 
-export default page
+export default Page

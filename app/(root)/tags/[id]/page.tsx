@@ -8,7 +8,7 @@ import Link from '@/node_modules/next/link'
 import { URLProps } from '@/types/index'
 import React from 'react'
 
-const page = async ({ params, searchParams }: URLProps) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const result = await getQuestionsByTagId({
     tagId: params.id,
     page: 1,
@@ -56,4 +56,4 @@ const page = async ({ params, searchParams }: URLProps) => {
     </>)
 }
 
-export default page
+export default Page
