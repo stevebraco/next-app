@@ -240,17 +240,16 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
 
 export async function getUserInfo(params: GetUserByIdParams) {
   try {
-    const { userId } = params
+    const { userId } = params;
 
-    const user = await User.findOne({ clerkId: userId })
+    const user = await User.findOne({ clerkId: userId });
 
     if (!user) {
-      throw new Error("User not Found");
+      throw new Error("User not found");
     }
 
-    const totalQuestions = await Question.countDocuments({ author: user._id })
-    const totalAnswers = await Answer.countDocuments({ author: user._id })
-    console.log('totalAnswerssss', totalAnswers)
+    const totalQuestions = await Question.countDocuments({ author: user._id });
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
 
     const [questionUpvotes] = await Question.aggregate([
       { $match: { author: user._id } },
@@ -315,10 +314,17 @@ export async function getUserInfo(params: GetUserByIdParams) {
 
     console.log('badgeCounts', badgeCounts)
 
-    return { user, totalQuestions, totalAnswers, badgeCounts }
-
+    return {
+      user,
+      totalQuestions,
+      totalAnswers,
+      badgeCounts,
+      reputation: user.reputation,
+    };
   } catch (error) {
     console.log(error)
+    throw error;
+
   }
 }
 
