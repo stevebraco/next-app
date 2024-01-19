@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { formatAndDivideNumber, getFormattedNumber, getTimestamp } from "@/lib/utils";
+import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import Metric from "../shared/metric/Metric";
 import { SignedIn } from "@clerk/nextjs";
 import EditDeleteAction from "../shared/editDeleteAction/EditDeleteAction";

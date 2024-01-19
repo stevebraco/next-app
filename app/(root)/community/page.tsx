@@ -1,11 +1,11 @@
-import UserCard from "@/components/card/UserCard";
+import React from "react";
 import Filter from "@/components/shared/filter/Filter";
 import NoResult from "@/components/shared/noResult/NoResult";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types/index";
-import React from "react";
+import UserCard from "@/components/card/UserCard";
 
 export async function Community({ searchParams }: SearchParamsProps) {
   const result = await getAllUsers({
@@ -46,5 +46,3 @@ export async function Community({ searchParams }: SearchParamsProps) {
     </>
   );
 }
-
-export default Community;
