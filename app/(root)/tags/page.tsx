@@ -8,7 +8,7 @@ import { getAllTags } from "@/lib/actions/tag.actions";
 import { SearchParamsProps } from "@/types/index";
 import Pagination from "@/components/shared/pagination/Pagination";
 
-export async function Tags({ searchParams }: SearchParamsProps) {
+const Page = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllTags({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
@@ -49,4 +49,4 @@ export async function Tags({ searchParams }: SearchParamsProps) {
   );
 }
 
-export default Tags;
+export default Page;
