@@ -4,9 +4,9 @@ import { FilterQuery } from "mongoose";
 
 import User from "@/database/user.model";
 import { connectToDatabase } from "../mongoose";
-import { GetAllTagsParams, GetQuestionsByTagIdParams, GetTopInteractedTagsParams } from "./shared.types";
 import Tag from "@/database/tag.model";
 import Question from "@/database/question.model";
+import { GetAllTagsParams, GetQuestionByTagIdParams, GetTopInteractedTagsParams } from "./shared.types";
 
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
@@ -83,7 +83,7 @@ export async function getAllTags(params: GetAllTagsParams) {
   }
 }
 
-export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
+export async function getQuestionsByTagId(params: GetQuestionByTagIdParams) {
   try {
     connectToDatabase();
 
