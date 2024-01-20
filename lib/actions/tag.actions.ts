@@ -141,5 +141,6 @@ export async function getTopPopularTags() {
 
   } catch (error) {
     console.log(error)
+    throw error;
   }
 }

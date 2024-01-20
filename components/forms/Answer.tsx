@@ -58,6 +58,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
       }
     } catch (error) {
       console.log(error);
+      throw (error)
     } finally {
       setIsSubmitting(false);
     }

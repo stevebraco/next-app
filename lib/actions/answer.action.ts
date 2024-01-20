@@ -63,6 +63,7 @@ export async function getAnswers(params: GetAnswersParams) {
     return { answers }
   } catch (error) {
     console.log(error)
+    throw (error)
   }
 }
 
@@ -101,6 +102,7 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
 
   } catch (error) {
     console.log(error)
+    throw (error)
   }
 }
 
@@ -135,6 +137,7 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
 
   } catch (error) {
     console.log(error)
+    throw(error)
   }
 }
 
