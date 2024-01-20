@@ -8,11 +8,13 @@ import EditDeleteAction from "../shared/editDeleteAction/EditDeleteAction";
 
 
 interface Props {
-  clerkId?: string;
+  clerkId?: string | null;
   _id: number;
   title: string;
   tags: { _id: number; name: string }[];
-  author: { _id: number; name: string; picture: string };
+  author: {
+    _id: number; name: string; picture: string; clerkId: string;
+  };
   upvotes: string[];
   views: number;
   answers: Array<object>;
