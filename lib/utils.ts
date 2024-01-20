@@ -1,5 +1,5 @@
 import { BADGE_CRITERIA } from "@/constants/index";
-import { BadgeCounts } from "@/types/index";
+import { BadgeCounts, BadgeParams } from "@/types/index";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import qs from 'query-string'
