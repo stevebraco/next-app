@@ -255,5 +255,6 @@ export async function getHotQuestions() {
 
   } catch (error) {
     console.log(error)
+    throw error;
   }
 }
