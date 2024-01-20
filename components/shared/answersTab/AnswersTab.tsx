@@ -1,4 +1,3 @@
-import QuestionCard from '@/components/card/QuestionCard'
 import { getUserAnswers } from '@/lib/actions/user.action'
 import { SearchParamsProps } from '@/types/index'
 import React from 'react'

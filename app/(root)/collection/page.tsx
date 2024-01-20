@@ -6,7 +6,6 @@ import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types/index";
-import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 
 

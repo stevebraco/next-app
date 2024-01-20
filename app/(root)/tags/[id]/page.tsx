@@ -1,10 +1,7 @@
 import QuestionCard from '@/components/card/QuestionCard'
 import NoResult from '@/components/shared/noResult/NoResult'
 import LocalSearchBar from '@/components/shared/search/LocalSearchBar'
-import { Button } from '@/components/ui/button'
-import { IQuestion } from '@/database/question.model'
 import { getQuestionsByTagId } from '@/lib/actions/tag.actions'
-import Link from '@/node_modules/next/link'
 import { URLProps } from '@/types/index'
 import React from 'react'
 
