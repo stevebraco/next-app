@@ -7,7 +7,7 @@ import {
   CreateUserParams,
   DeleteUserParams,
   GetAllUsersParams,
-  GetSavedQuestionsParams,
+  GetSavedQuestionParams,
   GetUserByIdParams,
   GetUserStatsParams,
   ToggleSaveQuestionParams,
@@ -179,7 +179,7 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
   }
 }
 
-export async function getSavedQuestions(params: GetSavedQuestionsParams) {
+export async function getSavedQuestions(params: GetSavedQuestionParams) {
 
   try {
     connectToDatabase();
