@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { SignedOut, auth } from "@clerk/nextjs";
+import { SignedOut, useAuth } from "@clerk/nextjs";
 
 const LeftSideBar = () => {
-  const { userId } = auth()
+  const { userId } = useAuth()
   // const userId = '123456789'
   const pathname = usePathname();
   return (
