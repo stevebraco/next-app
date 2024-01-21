@@ -11,7 +11,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
     page: 1,
     searchQuery: searchParams.q
   })
-  console.log(result)
+  console.log('result', result)
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">

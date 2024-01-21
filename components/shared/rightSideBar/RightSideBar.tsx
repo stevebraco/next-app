@@ -9,7 +9,6 @@ const RightSideBar = async () => {
 
   const hotQuestions = await getHotQuestions()
   const popularTags = await getTopPopularTags()
-  console.log(popularTags)
 
 
   return (

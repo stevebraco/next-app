@@ -71,7 +71,7 @@ export async function POST(req: Request) {
       picture: image_url,
     });
 
-    console.log(mongoUser);
+    console.log('test', mongoUser);
 
     return NextResponse.json({ message: "User created", user: mongoUser });
   }

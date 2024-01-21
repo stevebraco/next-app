@@ -21,7 +21,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
-  console.log(mongoUser);
+  console.log('mongoUser', mongoUser);
 
   const result = await getQuestionById({ questionId: params.id })
 

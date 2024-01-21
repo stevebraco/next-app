@@ -97,6 +97,9 @@ export async function createUser(userData: CreateUserParams) {
 
     const newUser = await User.create(userData);
 
+    console.log('userData', userData)
+    console.log('newUser', newUser)
+
     return newUser;
   } catch (error) {
     console.log(error);
