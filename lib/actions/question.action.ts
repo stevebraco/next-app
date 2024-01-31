@@ -129,6 +129,13 @@ export async function createQuestion(params: CreateQuestionParams) {
       $push: { tags: { $each: tagDocuments } },
     });
 
+    await Interaction.create({
+      user: author,
+      action: 'ask_question',
+      question: question._id,
+      tags: tagDocuments
+    })
+
     revalidatePath(path);
   } catch (error) { }
 }

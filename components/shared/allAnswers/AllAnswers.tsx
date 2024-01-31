@@ -47,7 +47,7 @@ const AllAnswers = async ({ questionId,
                 className="flex flex-1 items-start gap-1 sm:items-center"
               >
                 <Image
-                  src={'./assets/image/avatar.svg'}
+                  src={answer.author.picture}
                   width={18}
                   height={18}
                   alt="profile"

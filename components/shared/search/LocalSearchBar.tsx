@@ -1,4 +1,5 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "@/node_modules/next/navigation";
